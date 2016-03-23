@@ -5,12 +5,31 @@
   <title>Rango</title>
 </head>
   <body>
-    <h1>Rango says ...</h1>
-    hello world!
-    <br>
-    <strong>{{ boldmessage }}</strong>
-    <br>
+
+    <h1>Top 5 Categories List</h1>
+
+    {% if top5categories %}
+      <ul>
+        {% for category in top5categories %}
+        <li><a href="{% url 'rango:category' category.slug %}">{{ category.name }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <strong>There are no categories present.</strong>
+    {% endif %}
+
+    <h1>Top 5 Pages List</h1>
+
+    {% if top5pages %}
+      <ul>
+        {% for page in top5pages %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <strong>There are no pages.</strong>
+    {% endif %}
+
     <a href="/rango/about/">About</a>
-    <br>
   </body>
 </html>

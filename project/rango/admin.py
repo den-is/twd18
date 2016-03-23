@@ -4,8 +4,8 @@ from .models import Category, Page
 
 class CategoryAdmin(admin.ModelAdmin):
     fields = ['name', 'views', 'likes']
-    list_display = ('name', 'views', 'likes')
-    search_fields = ('name', )
+    list_display = ('name', 'views', 'likes', 'slug')
+    search_fields = ('name', 'slug')
 
 
 class PageAdmin(admin.ModelAdmin):
