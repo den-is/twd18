@@ -29,7 +29,9 @@
     {% else %}
       <strong>There are no pages.</strong>
     {% endif %}
-
-    <a href="/rango/about/">About</a>
+    <br>
+    <a href="{% url 'rango:add_category' %}">Add a New Category</a>
+    <br>
+    <a href="{% url 'rango:index' %}">About</a>
   </body>
 </html>

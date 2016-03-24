@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rango</title>
+</head>
+  <body>
+    <h1>Add Category</h1>
+
+    <form action="{% url 'rango:add_category' %}" method="post" id="category_form" accept-charset="utf-8">
+      {% csrf_token %}
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+
+      {% for field in form.visible_fields %}
+        {{ field.errors }}
+        {{ field.help_text }}
+        {{ field }}
+      {% endfor %}
+
+      <p><input type="submit" name="submit" value="Create Category"></p>
+    </form>
+
+    <a href="{% url 'rango:index' %}">Main page</a>
+  </body>
+</html>
