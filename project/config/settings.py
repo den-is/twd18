@@ -56,6 +56,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'config.urls'
 
+LOGIN_REQUIRED = '/rango/login/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
