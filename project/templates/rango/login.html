@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Rango</title>
-</head>
-  <body>
+{% extends 'base.html' %}
+{% block title %}Log In{% endblock %}
+{% block body %}
     <h1>Login to Rango</h1>
 
     {% if messages %}
@@ -23,8 +19,4 @@
       <br>
       <p><input type="submit" value="Log in"></p>
     </form>
-    <a href="{% url 'rango:register' %}">Register Here</a>
-    <br>
-    <a href="{% url 'rango:index' %}">Main page</a>
-  </body>
-</html>
+{% endblock %}

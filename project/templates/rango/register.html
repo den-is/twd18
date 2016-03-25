@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Rango</title>
-</head>
-  <body>
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block body %}
     <h1>Register with Rango</h1>
 
     {% if registered %}
@@ -21,6 +17,4 @@
       <p><input type="submit" name="submit" value="Register"></p>
     </form>
     {% endif %}
-    <a href="{% url 'rango:index' %}">Main page</a>
-  </body>
-</html>
+{% endblock %}
