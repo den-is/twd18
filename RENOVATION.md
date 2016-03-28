@@ -27,3 +27,4 @@ for cat in cats:
 * _9.3_ admin interfaca; make UserProfile StackedInline into User admin page. https://docs.djangoproject.com/en/1.8/topics/auth/customizing/#extending-the-existing-user-model
 * _9.4.2_ no need `data=request.POST` for bounding forms just Form(request.POST)
 * _9.8_ exercise hint. used django messages framework. https://docs.djangoproject.com/en/1.8/ref/contrib/messages/
+* _11.6_ minor code refactor
