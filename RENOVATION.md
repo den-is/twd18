@@ -28,3 +28,5 @@ for cat in cats:
 * _9.4.2_ no need `data=request.POST` for bounding forms just Form(request.POST)
 * _9.8_ exercise hint. used django messages framework. https://docs.djangoproject.com/en/1.8/ref/contrib/messages/
 * _11.6_ minor code refactor
+* _12_ slight refactoring of templates for registration redux. `{% extends 'base.html' %}`
+* _12.3.6_ typo `LOGIN_REQUIRED` instead of `LOGIN_URL`
