@@ -37,7 +37,10 @@
         {% if top5pages %}
           <ul class="list-group">
             {% for page in top5pages %}
-            <li class="list-group-item"><a href="{{ page.url }}" target="_blank">{{ page.title }}</a></li>
+            <li class="list-group-item">
+              <span class="badge">{{ page.views }}</span>
+              <a href="{{ page.url }}" target="_blank">{{ page.title }}</a>
+            </li>
             {% endfor %}
           </ul>
         {% else %}

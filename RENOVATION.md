@@ -72,3 +72,5 @@
   else:
       BING_API_KEY = "YOUR_BING_API_KEY_GOES_HERE"
   ```
+* __16.1__ involve get_object_or_404 helper function (use it in other places as well)
+* __17.1.3__ use bootstrap badge class in list items for views/likes

@@ -7,3 +7,4 @@
 * deploy on own production server. nginx, postgresql, gunicorn/uWSGI
 * Dockerize application. In addition run or services like nginx, postgresql in docker
 * serve media with nginx
+* custom error pages

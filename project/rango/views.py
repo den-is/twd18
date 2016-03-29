@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -49,15 +49,24 @@ def about(request):
 
 def category(request, category_name_slug):
     context_dict = {}
+    context_dict['result_list'] = None
+    context_dict['query'] = None
 
-    try:
-        category = Category.objects.get(slug=category_name_slug)
-        context_dict['category_name'] = category.name
-        pages = category.page_set.all()
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        pass
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            context_dict['result_list'] = run_query(query)
+            context_dict['query'] = query
+
+    category = get_object_or_404(Category, slug=category_name_slug)
+    context_dict['category_name'] = category.name
+    pages = category.page_set.order_by('-views')
+    context_dict['pages'] = pages
+    context_dict['category'] = category
+
+    if not context_dict['query']:
+        context_dict['query'] = category.name
 
     return render(request, 'rango/category.html', context_dict)
 
@@ -102,12 +111,24 @@ def add_page(request, category_name_slug):
     return render(request, 'rango/add_page.html', context_dict)
 
 def search(request):
-    result_list = []
 
     if request.method == 'POST':
+        result_list = []
         query = request.POST['query'].strip()
 
         if query:
             result_list = run_query(query)
 
     return render(request, 'rango/search.html', {'result_list': result_list})
+
+def track_url(request):
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = int(request.GET['page_id'])
+            page = get_object_or_404(Page, pk=page_id)
+            page.views += 1
+            page.save()
+
+            return redirect(page.url)
+
+    return redirect(reverse('rango:index'))
