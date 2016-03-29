@@ -9,12 +9,12 @@
       {% if pages %}
       <ul>
         {% for page in pages %}
-        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        <li><a href="{{ page.url }}" target="_blank">{{ page.title }}</a></li>
         {% endfor %}
       </ul>
       {% if user.is_authenticated %}
       <br>
-      <a href="{% url 'rango:add_page' category.slug %}">Add Page</a>
+      <a href="{% url 'rango:add_page' category.slug %}" class="btn btn-primary" role="button">Add Page</a>
       {% endif %}
       {% else %}
       <br>

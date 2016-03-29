@@ -40,7 +40,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd party apps
     'registration',
+    'crispy_forms',
+    # my apps
     'rango',
 )
 
@@ -110,6 +113,8 @@ STATICFILES_DIRS = (
         )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_PATH
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Authentication and Registration related
 LOGIN_REQUIRED = '/accounts/login/'

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block title %}Sing In{% endblock %}
 {% block body %}
-  <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+  <link href="{% static 'css/forms.css' %}" rel="stylesheet">
   <form action="." method="post" accept-charset="utf-8" class="form-signin" role="form">
     {% csrf_token %}
 
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-heading">Please sign in</h2>
 
     <input name="username" type="text" class="form-control" placeholder="Username" id="id_username" maxlength="254" required autofocus="">
     <input name="password" type="password" class="form-control" placeholder="Password" id="id_password" required>
