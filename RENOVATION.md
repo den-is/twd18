@@ -51,8 +51,8 @@
     }
     ```
     * find `.form-signin-heading` in css file and change it to `.form-heading` - making it universal, coz you can use it for other forms
-    * in login.html change <h2> class to .form-heading
-    * in registration_form.html add <h2> with same class
+    * in login.html change `<h2>` class to .form-heading
+    * in registration_form.html add `<h2>` with same class
     * give your registration form class `form-register`
     * in form template add `{% load staticfiles %}`
     * add in tempates `<link href="{% static 'css/forms.css' %}" rel="stylesheet">`
