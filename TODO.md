@@ -1,5 +1,6 @@
-* integrate django-crispy-forms
+* ~~integrate django-crispy-forms~~
 * integrate django-allauth
+* delete uploaded image when changed or deleted
 * integrate external `Google search API` or `DuckDuckGo API` or `Yahoo search API` - whichever, except Bing, for practice
 * implement logging (log registrations, login success/fail, deletions, additions, ...).
 * add api

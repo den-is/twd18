@@ -7,6 +7,7 @@ from datetime import datetime
 
 from .models import Category, Page
 from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from .bing_search import run_query
 
 
 def index(request):
@@ -99,3 +100,14 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': cat}
 
     return render(request, 'rango/add_page.html', context_dict)
+
+def search(request):
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            result_list = run_query(query)
+
+    return render(request, 'rango/search.html', {'result_list': result_list})

@@ -1,8 +1,8 @@
 * Using relative imports https://www.python.org/dev/peps/pep-0328/
-* _4.5_  Mapping URLs https://docs.djangoproject.com/en/1.8/releases/1.8/#django-conf-urls-patterns
-* _5.1.1-2_  Configuring the Templates Directory https://docs.djangoproject.com/en/1.8/ref/templates/upgrading/#the-templates-settings
-* _5.3-4_ serve uploaded media as suitable for Django 1.8. refine description of static files. https://docs.djangoproject.com/en/1.8/howto/static-files/
-* _6.7_ slightly updated populate_rango script. Used related objects reference instead of directly quering page table by category id
+* __4.5__  Mapping URLs https://docs.djangoproject.com/en/1.8/releases/1.8/#django-conf-urls-patterns
+* __5.1.1-2__  Configuring the Templates Directory https://docs.djangoproject.com/en/1.8/ref/templates/upgrading/#the-templates-settings
+* __5.3-4__ serve uploaded media as suitable for Django 1.8. refine description of static files. https://docs.djangoproject.com/en/1.8/howto/static-files/
+* __6.7__ slightly updated populate_rango script. Used related objects reference instead of directly quering page table by category id
 * Code snippet to update existing rows in db "slug" without populate_rango script
   ```python
   from rango.models import Category
@@ -18,24 +18,24 @@
   for cat in cats:
       print cat.name, cat.slug
   ```
-* _7.3.4_ Used related objects reference instead of directly quering page table.
-* _7.*_ and ongoing, used `url` template tag instead of hardcoded links
-* _8.2.2_ using django shortcuts `redirect(reverse('view_name'))` in `add_category`
-* _8.2.7_ clean() method override. https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
-* _8.2.7_ actual html URL widget not allowing to enter url without `http://`
-* _9.3_ broken markup in the beginnig
-* _9.3_ admin interfaca; make UserProfile StackedInline into User admin page. https://docs.djangoproject.com/en/1.8/topics/auth/customizing/#extending-the-existing-user-model
-* _9.4.2_ no need `data=request.POST` for bounding forms just Form(request.POST)
-* _9.8_ exercise hint. used django messages framework. https://docs.djangoproject.com/en/1.8/ref/contrib/messages/
-* _11.6_ minor code refactor
-* _12_ slight refactoring of templates for registration redux. `{% extends 'base.html' %}`
-* _12.3.6_ typo `LOGIN_REQUIRED` instead of `LOGIN_URL`
-* _13_ Bootstrapping Rango
+* __7.3.4__ Used related objects reference instead of directly quering page table.
+* __7.*__ and ongoing, used `url` template tag instead of hardcoded links
+* __8.2.2__ using django shortcuts `redirect(reverse('view_name'))` in `add_category`
+* __8.2.7__ clean() method override. https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-and-validating-fields-that-depend-on-each-other
+* __8.2.7__ actual html URL widget not allowing to enter url without `http://`
+* __9.3__ broken markup in the beginnig
+* __9.3__ admin interfaca; make UserProfile StackedInline into User admin page. https://docs.djangoproject.com/en/1.8/topics/auth/customizing/#extending-the-existing-user-model
+* __9.4.2__ no need `data=request.POST` for bounding forms just Form(request.POST)
+* __9.8__ exercise hint. used django messages framework. https://docs.djangoproject.com/en/1.8/ref/contrib/messages/
+* __11.6__ minor code refactor
+* __12__ slight refactoring of templates for registration redux. `{% extends 'base.html' %}`
+* __12.3.6__ typo `LOGIN_REQUIRED` instead of `LOGIN_URL`
+* __13__ Bootstrapping Rango
   * downloaded all required files into static folder and used `{% load staticfiles %}`
   * Bootstrap 3.3.6
   * JQuery 1.12.2
-  * _13.2.1_ template typo: `div class='page-header'` - open div should be outside of `if` statement
-  * _13.2.1_ typo at pages section  `<strong>There are no categories present.</strong>` should be pages instead of categories
+  * __13.2.1__ template typo: `div class='page-header'` - open div should be outside of `if` statement
+  * __13.2.1__ typo at pages section  `<strong>There are no categories present.</strong>` should be pages instead of categories
   * used `django-crispy-forms`
     * `pip install django-crispy-forms`
     * `in settings.py` add `CRISPY_TEMPLATE_PACK = 'bootstrap3'`
@@ -56,6 +56,19 @@
     * give your registration form class `form-register`
     * in form template add `{% load staticfiles %}`
     * add in tempates `<link href="{% static 'css/forms.css' %}" rel="stylesheet">`
-    * _repeat same for other forms_
+    * __repeat same for other forms_
   * add `target="_blank"` to page links so they open in a new tab
   * make `Add Page` link on category pages act as a button, adding `class="btn btn-primary" role="button"`
+* __14.2__ update template for get_category_list templatetag (IMHO more readable)
+* __15.2__ switch to `requests` package instead of urllib
+* __15.3__ store secrets (BING_API_KEY) in separate file (e.g. rango/secrets.py). Example contents of secrets.py:
+  ```python
+  import os
+
+  BING_API_KEY = None
+
+  if os.getenv('BING_API_KEY'):
+      BING_API_KEY = os.getenv('BING_API_KEY')
+  else:
+      BING_API_KEY = "YOUR_BING_API_KEY_GOES_HERE"
+  ```
