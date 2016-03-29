@@ -2,7 +2,12 @@
 {% block title %}About{% endblock %}
 {% load staticfiles %}
 {% block body %}
-    <h1>Here is Rango ...</h1>
-    <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango"/>
-    <p>You have visited site {{ visits }} time{{ visits|pluralize }}.</p>
+    <div class="page-header">
+      <h1>About</h1>
+    </div>
+    <div>
+      <p>Here is Rango</p>
+      <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango"/>
+      <p>You have visited site {{ visits }} time{{ visits|pluralize }}.</p>
+    </div>
 {% endblock %}

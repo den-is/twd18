@@ -3,7 +3,9 @@
 {% block title %}{{ category_name }}{% endblock %}
 {% block body %}
     {% if category %}
-    <h1>{{ category_name }}</h1>
+      <div class="page-header">
+        <h1>{{ category_name }}</h1>
+      </div>
       {% if pages %}
       <ul>
         {% for page in pages %}
@@ -20,6 +22,8 @@
       <br>
       {% endif %}
     {% else %}
-    <p>The specified category {{ category_name }} does not exist!</p>
+      <div class="page-header">
+        <h1>The specified category {{ category_name }} does not exist!</h1>
+      </div>
     {% endif %}
 {% endblock %}

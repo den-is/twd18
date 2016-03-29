@@ -1,33 +1,49 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block body %}
+    <div class="page-header">
     {% if user.is_authenticated %}
-    <h1>Rango says: Hello {{ user.username }}!</h1>
+      <h1>Rango says: Hello {{ user.username }}!</h1>
     {% else %}
-    <h1>Rango says: Hello world!</h1>
+      <h1>Rango says: Hello world!</h1>
     {% endif %}
+    </div>
 
-    <h1>Top 5 Categories List</h1>
+    <div class="row placeholders">
+      <div class="col-xs-12 col-sm-6 placeholder">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4 class="panel-title">Top 5 Categories</h4>
+          </div>
+        </div>
 
-    {% if top5categories %}
-      <ul>
-        {% for category in top5categories %}
-        <li><a href="{% url 'rango:category' category.slug %}">{{ category.name }}</a></li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <strong>There are no categories present.</strong>
-    {% endif %}
+        {% if top5categories %}
+          <ul class="list-group">
+            {% for category in top5categories %}
+            <li class="list-group-item"><a href="{% url 'rango:category' category.slug %}">{{ category.name }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <strong>There are no categories present.</strong>
+        {% endif %}
+      </div>
+      <div class="col-xs-12 col-sm-6 placeholder">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4 class="panel-title">Top 5 Pages</h4>
+          </div>
+        </div>
 
-    <h1>Top 5 Pages List</h1>
+        {% if top5pages %}
+          <ul class="list-group">
+            {% for page in top5pages %}
+            <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <strong>There are no pages.</strong>
+        {% endif %}
+      </div>
+    </div>
 
-    {% if top5pages %}
-      <ul>
-        {% for page in top5pages %}
-        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <strong>There are no pages.</strong>
-    {% endif %}
 {% endblock %}

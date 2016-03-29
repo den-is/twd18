@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block body %}
-<h1>Login</h1>
-  <form action="." method="post" accept-charset="utf-8">
+  <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+  <form action="." method="post" accept-charset="utf-8" class="form-signin" role="form">
     {% csrf_token %}
-    {{ form.as_p }}
 
-    <input type="submit" value="Log in">
-    <input type="hidden" name="next" value="{{ next }}">
+    <h2 class="form-signin-heading">Please sign in</h2>
+
+    <input name="username" type="text" class="form-control" placeholder="Username" id="id_username" maxlength="254" required autofocus="">
+    <input name="password" type="password" class="form-control" placeholder="Password" id="id_password" required>
+
+    <button type="submit" value="Submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
 
   </form>
-  <p>Not a member? <a href="{% url 'registration_register'%}">Register</a>!</p>
 {% endblock %}
