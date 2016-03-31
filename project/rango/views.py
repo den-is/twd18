@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
 from datetime import datetime
+import json
 
 from .models import Category, Page, UserProfile
 from .forms import CategoryForm, PageForm, UserProfileForm
@@ -234,3 +235,16 @@ def suggest_category(request):
     cat_list = get_category_list(8, starts_with)
 
     return render(request, 'rango/cats.html', {'cats': cat_list})
+
+@login_required
+def auto_add_page(request):
+    if request.method == 'GET':
+        cat_id = request.GET.get('category_id', False)
+        url = request.GET.get('url', False)
+        title = request.GET.get('title', False)
+        if cat_id and url and title:
+            category = get_object_or_404(Category, id=int(cat_id))
+            page = Page.objects.get_or_create(category=category, title=title, url=url)
+            if page[1]:
+                response_data = {'page_id': page[0].id}
+                return HttpResponse(json.dumps(response_data))

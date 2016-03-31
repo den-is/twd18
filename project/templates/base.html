@@ -53,18 +53,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-
-          <ul class="nav nav-list">
-            <li class="nav-header">Find a Category</li>
-            <form>
-              <label></label>
-              <li><input class="search-query span10" type="text" name="suggestion" value="" id="suggestion"></li>
-            </form>
-          </ul>
+          <form>
+            <input class="search-query span10" type="text" name="suggestion" value="" id="suggestion" placeholder="Find a category">
+          </form>
 
           <div id="cats">
           </div>
 
+          <br>
           {% load rango_extras %}
           {% block sidebar %}
           {% get_category_list category %}
