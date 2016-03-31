@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse
 from datetime import datetime
 
 from .models import Category, Page, UserProfile
@@ -194,3 +195,19 @@ def user_area(request, user_name):
     profile = get_object_or_404(UserProfile, user_id=user.id)
 
     return render(request, 'rango/user_area.html', {'users': users, 'profile': profile})
+
+@login_required
+def like_category(request):
+    cat_id = None
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+
+    likes = 0
+    if cat_id:
+        cat = Category.objects.get(id=int(cat_id))
+        if cat:
+            likes = cat.likes + 1
+            cat.likes = likes
+            cat.save()
+
+    return HttpResponse(likes)

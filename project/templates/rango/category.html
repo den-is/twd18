@@ -6,6 +6,14 @@
       <div class="page-header">
         <h1>{{ category_name }}</h1>
       </div>
+
+      <p>
+        <strong id="like_count">{{ category.likes }}</strong>
+        {% if user.is_authenticated %}
+          <button id="likes" data-catid="{{ category.id }}" class="btn btn-sm btn-primary" type="button">Like</button>
+        {% endif %}
+      </p>
+
       {% if pages %}
       <ul class="list-group">
         {% for page in pages %}
