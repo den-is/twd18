@@ -14,4 +14,5 @@ urlpatterns = [
         url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
         url(r'^profile/(?P<user_name>[\w]+)/$', views.user_area, name='user_area'),
         url(r'^like_category/$', views.like_category, name='like_category'),
+        url(r'^suggest_category/$', views.suggest_category, name='suggest_category'),
         ]

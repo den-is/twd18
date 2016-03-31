@@ -9,4 +9,16 @@ $(document).ready(function() {
     });
   });
 
+  $("#suggestion").keyup(function(){
+    var query;
+    query = $(this).val();
+    if(query) {
+      $.get('/rango/suggest_category/', {suggestion: query}, function(data){
+        $("#cats").html(data);
+      });
+    } else {
+      $("#cats").empty();
+    }
+  });
+
 });
