@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}User Area{% endblock %}
+{% block body %}
+    <div class="row">
+      <div class="col-md-2 col-md-offset-2">
+            {% if profile.picture %}
+            <img src="{% static profile.picture %}" alt="{{ profile.user.username}}" height="200" width="200">
+            {% else %}
+            <img src="{% static 'images/userimgplaceholder.png' %}" alt="No image" height="200" width="200">
+            {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">{{ profile.user.username }}</h1>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item">{{ profile.user.email }}</li>
+              {% if profile.website %}
+              <li class="list-group-item">{{ profile.website }}</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        {% if user.username != profile.user.username %}
+        <a href="{% url 'rango:user_area' user %}">Go back to your profile</a>
+        {% endif %}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">User list</div>
+          <ul class="list-group">
+            {% for usr in users %}
+              <li class="list-group-item"><a href="{% url 'rango:user_area' usr.user.username %}">{{ usr.user.username }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+{% endblock %}

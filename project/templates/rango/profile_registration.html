@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Profile Details{% endblock %}
+{% block body %}
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
+
+    {% load crispy_forms_tags %}
+    <div class="col-md-6 col-md-offset-3">
+      <form action="{% url 'rango:add_profile' %}" method="post" id="add_profile_form" role="form">
+        <h2 class="form-heading">Add Profile Details</h2>
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button type="submit" value="submit" class="btn btn-lg btn-primary center-block">Submit</button>
+      </form>
+      <a href="{% url 'rango:index' %}" class="btn btn-default" role="button">Skip</a>
+    </div>
+{% endblock %}

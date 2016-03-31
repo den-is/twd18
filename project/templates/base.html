@@ -29,15 +29,22 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'rango:index' %}">Home</a></li>
+            <li><a href="{% url 'rango:about' %}">About</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'rango:add_category' %}">Add a New Category</a></li>
-            <li><a href="{% url 'auth_password_change' %}">Change password</a></li>
-            <li><a href="{% url 'auth_logout' %}?next=/rango/">Log Out</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'rango:user_area' user.username %}">User Area</a></li>
+                <li><a href="{% url 'rango:edit_profile' %}">Edit Profile</a></li>
+                <li><a href="{% url 'auth_password_change' %}">Change password</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/rango/">Log Out</a></li>
+              </ul>
+            </li>
             {% else %}
             <li><a href="{% url 'registration_register' %}">Register Here</a></li>
             <li><a href="{% url 'auth_login' %}">Login</a></li>
             {% endif %}
-            <li><a href="{% url 'rango:about' %}">About</a></li>
           </ul>
         </div>
       </div>
@@ -53,7 +60,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           {% if messages %}
-          <div class="row">
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <ul class="messages">
                 {% for message in messages %}
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>

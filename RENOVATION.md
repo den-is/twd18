@@ -30,6 +30,25 @@
 * __11.6__ minor code refactor
 * __12__ slight refactoring of templates for registration redux. `{% extends 'base.html' %}`
 * __12.3.6__ typo `LOGIN_REQUIRED` instead of `LOGIN_URL`
+* __12.3.7__ Overwritten MyRegistration view did not work.
+  ```python
+  # Create a new class that redirects the user to the index page, if successful at logging
+  class MyRegistrationView(RegistrationView):
+      def get_success_url(self,request, user):
+          return '/rango/'
+  ```
+  ```
+  TypeError at /accounts/register/
+  get_success_url() takes exactly 3 arguments (2 given)
+  ```
+  Actually mentioned it at __16.3(1)__ when first tried registering with add_profile functionality. Substituted it with:
+  ```python
+  # Create a new class that redirects the user to the index page, if successful at logging
+  class MyRegistrationView(RegistrationView):
+      success_url = '/rango/'
+      # or
+      # success_url = '/rango/add_profile/'
+  ```
 * __13__ Bootstrapping Rango
   * downloaded all required files into static folder and used `{% load staticfiles %}`
   * Bootstrap 3.3.6
@@ -74,3 +93,5 @@
   ```
 * __16.1__ involve get_object_or_404 helper function (use it in other places as well)
 * __17.1.3__ use bootstrap badge class in list items for views/likes
+* __16.3(2)__ rename profile -> profile_edit in view, template, url_name
+* __16.3(2)__ add readonly user profile page and/or combine it with user area page (list of users)

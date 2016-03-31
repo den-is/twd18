@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
 
-from .models import Category, Page
-from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from .models import Category, Page, UserProfile
+from .forms import CategoryForm, PageForm, UserProfileForm
 from .bing_search import run_query
 
 
@@ -110,6 +111,7 @@ def add_page(request, category_name_slug):
 
     return render(request, 'rango/add_page.html', context_dict)
 
+@login_required
 def search(request):
 
     if request.method == 'POST':
@@ -132,3 +134,63 @@ def track_url(request):
             return redirect(page.url)
 
     return redirect(reverse('rango:index'))
+
+def register_profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            profile.save()
+
+            messages.success(request, 'Profile details updated')
+            return redirect(reverse('rango:index'))
+        else:
+            messages.error(request, 'Fill in all required fields')
+    else:
+        form = UserProfileForm()
+
+    return render(request, 'rango/profile_registration.html', {'form': form})
+
+@login_required
+def edit_profile(request):
+
+    try:
+        profile = UserProfile.objects.get(user_id=request.user)
+    except UserProfile.DoesNotExist:
+        profile = UserProfile()
+        profile.user = request.user
+        profile.save()
+
+    if request.method == 'POST':
+        profile_form = UserProfileForm(request.POST, instance=profile)
+
+        if profile_form.is_valid():
+            new_profile = profile_form.save(commit=False)
+
+            if 'picture' in request.FILES:
+                new_profile.picture = request.FILES['picture']
+
+            new_profile.save()
+
+            messages.success(request, 'Profile details updated')
+            return redirect(reverse('rango:index'))
+        else:
+            messages.error(request, 'Fill in all required fields')
+    else:
+        profile_form = UserProfileForm(instance=profile)
+
+    return render(request, 'rango/profile.html', {'profile_form': profile_form})
+
+@login_required
+def user_area(request, user_name):
+    users = UserProfile.objects.all().exclude(user_id=1).exclude(user_id=request.user.id)
+
+    user = get_object_or_404(User, username=user_name)
+    profile = get_object_or_404(UserProfile, user_id=user.id)
+
+    return render(request, 'rango/user_area.html', {'users': users, 'profile': profile})

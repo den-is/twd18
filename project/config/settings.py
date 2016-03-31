@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # 3rd party apps
     'registration',
     'crispy_forms',
@@ -124,3 +125,4 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/rango/'
 LOGIN_URL = '/accounts/login/'
+SITE_ID = 1

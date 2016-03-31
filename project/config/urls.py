@@ -19,8 +19,9 @@ from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
 
 class MyRegistrationView(RegistrationView):
-    def get_success_url(self, request, user):
-        return '/rango/'
+    success_url = '/rango/add_profile/'
+    #def get_success_url(self, request, user):
+    #    return '/rango/add_profile/'
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

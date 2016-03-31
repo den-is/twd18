@@ -10,4 +10,7 @@ urlpatterns = [
         url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.category, name='category'),
         url(r'^search/$', views.search, name='search'),
         url(r'^goto/$', views.track_url, name='goto'),
+        url(r'^add_profile/$', views.register_profile, name='add_profile'),
+        url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
+        url(r'^profile/(?P<user_name>[\w]+)/$', views.user_area, name='user_area'),
         ]

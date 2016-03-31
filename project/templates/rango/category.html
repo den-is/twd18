@@ -34,13 +34,14 @@
     <div class="row">
       <div class="panel panel-primary">
         <br>
+        <!--<div class="col-md-10 col-md-offset-1">-->
+          <form action="{% url 'rango:category' category.slug %}" method="post" class="form-inline" id="user_form" role="form">
+            {% csrf_token %}
+            <input type="text" size="50" name="query" value="{{query}}" id="query" class="form-control">
 
-        <form action="{% url 'rango:category' category.slug %}" method="post" class="form-inline" id="user_form" role="form">
-          {% csrf_token %}
-          <input type="text" size="50" name="query" value="{{query}}" id="query" class="form-control">
-
-          <button type="submit" value="Search" name="submit" class="btn btn-primary">Search</button>
-        </form>
+            <button type="submit" value="Search" name="submit" class="btn btn-primary">Search</button>
+          </form>
+        <!--</div>-->
 
         <div class="panel">
           {% if result_list %}
