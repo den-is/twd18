@@ -1,0 +1,10 @@
+version: '2'
+services:
+  rango:
+    build: .
+    image: rango
+    command: python manage.py runserver 0.0.0.0:8000
+#    volumes:
+#      - ./project:/code
+    ports:
+      - "8000:8000"
