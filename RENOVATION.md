@@ -49,6 +49,7 @@
       # or
       # success_url = '/rango/add_profile/'
   ```
+  Issue at registration-redux github: https://github.com/macropin/django-registration/issues/167
 * __13__ Bootstrapping Rango
   * downloaded all required files into static folder and used `{% load staticfiles %}`
   * Bootstrap 3.3.6
@@ -61,21 +62,13 @@
     * in template add `{% load crspy_forms_tags %}`
     * in template change `{{ form.as_p }}` to `{{ form|crispy }}`
   * save signin.css as forms.css in project/static/css
-    * add following snippet for registration form and simmilar for other forms:
-    ```css
-    .form-register {
-      max-width: 330px;
-      padding: 15px;
-      margin: 0 auto;
-    }
-    ```
     * find `.form-signin-heading` in css file and change it to `.form-heading` - making it universal, coz you can use it for other forms
     * in login.html change `<h2>` class to .form-heading
     * in registration_form.html add `<h2>` with same class
-    * give your registration form class `form-register`
     * in form template add `{% load staticfiles %}`
     * add in tempates `<link href="{% static 'css/forms.css' %}" rel="stylesheet">`
-    * __repeat same for other forms_
+    * _repeat same for other forms_
+    * control width of forms with bootstrap, e.g.: `<div class="col-md-4 col-md-offset-4">`
   * add `target="_blank"` to page links so they open in a new tab
   * make `Add Page` link on category pages act as a button, adding `class="btn btn-primary" role="button"`
 * __14.2__ update template for get_category_list templatetag (IMHO more readable)

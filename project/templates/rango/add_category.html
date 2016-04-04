@@ -3,13 +3,14 @@
 {% block title %}Add Category{% endblock %}
 {% block body %}
     <link href="{% static 'css/forms.css' %}" rel="stylesheet">
+    <div class="col-md-6 col-md-offset-3">
+      {% load crispy_forms_tags %}
+      <form action="{% url 'rango:add_category' %}" method="post" role="form">
+        <h2 class="form-heading">Add Category</h2>
+        {% csrf_token %}
+        {{ form|crispy }}
 
-    {% load crispy_forms_tags %}
-    <form action="{% url 'rango:add_category' %}" method="post" id="category_form" role="form">
-      <h2 class="form-heading">Add Category</h2>
-      {% csrf_token %}
-      {{ form|crispy }}
-
-      <button type="submit" value="Create Category" class="btn btn-lg btn-primary center-block">Create Category</button>
-    </form>
+        <button type="submit" value="Create Category" class="btn btn-lg btn-primary center-block">Create Category</button>
+      </form>
+    </div>
 {% endblock %}
