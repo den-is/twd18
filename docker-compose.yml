@@ -1,10 +1,25 @@
 version: '2'
 services:
-  rango:
-    build: .
-    image: rango
-    command: python manage.py runserver 0.0.0.0:8000
-#    volumes:
-#      - ./project:/code
+  app:
+    build: ./project/
+    image: rango-app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.prod
+    command: /srv/initapp.sh
+    volumes:
+      - /srv:/srv/static_root
+      - /srv:/srv/media
+    expose:
+      - "8000"
+    depends_on:
+      - db
+  db:
+    build: ./db/
+    image: rango-db
+  nginx:
+    build: ./nginx/
+    image: rango-nginx
     ports:
-      - "8000:8000"
+      - "8000:80"
+    volumes_from:
+      - app
