@@ -1,4 +1,5 @@
 .git
+.gitkeep
 RENOVATION.md
 TODO.md
 rangodb.sqlite3

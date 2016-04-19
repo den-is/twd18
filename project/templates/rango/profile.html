@@ -6,7 +6,7 @@
 
     <div class="col-md-6 col-md-offset-3">
       {% load crispy_forms_tags %}
-      <form action="{% url 'rango:edit_profile' %}" method="post" id="profile_form" role="form">
+      <form action="{% url 'rango:edit_profile' %}" method="post" id="profile_form" role="form" enctype="multipart/form-data">
         <h2 class="form-heading">Edit Profile</h2>
         {% csrf_token %}
         {{ profile_form|crispy }}
