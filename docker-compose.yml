@@ -6,7 +6,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.prod
     command: /srv/initapp.sh
-    # compose on windows can't run command from shell script
+    ## compose on windows can't run command from shell script
     # command:
     #   - gunicorn
     #   - config.wsgi:application
