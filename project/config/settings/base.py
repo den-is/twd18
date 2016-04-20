@@ -1,4 +1,5 @@
 import os
+from django.conf import settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
@@ -6,6 +7,8 @@ STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
+# Might be overridden in individual environment configs
+# if DEBUG=False might be both URL or local prefix, otherwise only prefix
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -18,6 +21,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # 3rd party apps
+    'django_extensions',
     'registration',
     'crispy_forms',
     # my apps
