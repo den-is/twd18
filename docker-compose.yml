@@ -24,8 +24,8 @@ services:
     #   # - "./logs/access.log"
     #   - --reload
     volumes:
-      - /srv/static_root
-      - /srv/media_root
+      - /srv/static_root:/srv/static_root
+      - /srv/media_root:/srv/media_root
     expose:
       - "8000"
     depends_on:

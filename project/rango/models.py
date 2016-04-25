@@ -29,11 +29,14 @@ class Page(models.Model):
     def __unicode__(self):
         return self.title
 
+def user_pic_upload_path(instance, filename):
+    return 'profile_images/{userid}/{imgfile}'.format(userid=instance.user.id, imgfile=filename)
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
     website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to='profile_images',  blank=True)
+    picture = models.ImageField(upload_to=user_pic_upload_path,  blank=True)
 
     def __unicode__(self):
         return self.user.username
