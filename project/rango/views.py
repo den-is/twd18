@@ -193,7 +193,11 @@ def user_area(request, user_name):
     users = UserProfile.objects.all().exclude(user_id=1).exclude(user_id=request.user.id)
 
     user = get_object_or_404(User, username=user_name)
-    profile = get_object_or_404(UserProfile, user_id=user.id)
+    try:
+        profile = UserProfile.objects.get(user_id=user.id)
+    except UserProfile.DoesNotExist:
+        messages.error(request, "You don't have profile yet, please create/edit one.")
+        profile = None
 
     return render(request, 'rango/user_area.html', {'users': users, 'profile': profile})
 

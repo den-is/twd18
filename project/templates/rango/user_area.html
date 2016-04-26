@@ -2,33 +2,35 @@
 {% load staticfiles %}
 {% block title %}User Area{% endblock %}
 {% block body %}
-    <div class="row">
-      <div class="col-md-2 col-md-offset-2">
-            {% if profile.picture %}
-            <img src="{{ profile.picture.url }}" alt="{{ profile.user.username}}" height="200" width="200">
-            {% else %}
-            <img src="{% static 'images/userimgplaceholder.png' %}" alt="No image" height="200" width="200">
-            {% endif %}
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h1 class="panel-title">{{ profile.user.username }}</h1>
-          </div>
-          <div class="panel-body">
-            <ul class="list-group">
-              <li class="list-group-item">{{ profile.user.email }}</li>
-              {% if profile.website %}
-              <li class="list-group-item">{{ profile.website }}</li>
+    {% if profile %}
+      <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+              {% if profile.picture %}
+              <img src="{{ profile.picture.url }}" alt="{{ profile.user.username}}" height="200" width="200">
+              {% else %}
+              <img src="{% static 'images/userimgplaceholder.png' %}" alt="No image" height="200" width="200">
               {% endif %}
-            </ul>
-          </div>
         </div>
-        {% if user.username != profile.user.username %}
-        <a href="{% url 'rango:user_area' user %}">Go back to your profile</a>
-        {% endif %}
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h1 class="panel-title">{{ profile.user.username }}</h1>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item">{{ profile.user.email }}</li>
+                {% if profile.website %}
+                <li class="list-group-item">{{ profile.website }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          {% if user.username != profile.user.username %}
+          <a href="{% url 'rango:user_area' user %}">Go back to your profile</a>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% endif %}
     <br>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">

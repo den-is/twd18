@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -40,3 +42,11 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+@receiver(post_delete, sender=UserProfile)
+def delete_userpic(sender, instance, **kwargs):
+    """Delete UserProfile picture when profile is deleted.
+    """
+    storage = instance.picture.storage
+    path = instance.picture.path
+    storage.delete(path)
