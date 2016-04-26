@@ -161,12 +161,7 @@ def register_profile(request):
 @login_required
 def edit_profile(request):
 
-    try:
-        profile = UserProfile.objects.get(user_id=request.user)
-    except UserProfile.DoesNotExist:
-        profile = UserProfile()
-        profile.user = request.user
-        profile.save()
+    profile = UserProfile.objects.get(user_id=request.user)
 
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, instance=profile)
@@ -193,11 +188,7 @@ def user_area(request, user_name):
     users = UserProfile.objects.all().exclude(user_id=1).exclude(user_id=request.user.id)
 
     user = get_object_or_404(User, username=user_name)
-    try:
-        profile = UserProfile.objects.get(user_id=user.id)
-    except UserProfile.DoesNotExist:
-        messages.error(request, "You don't have profile yet, please create/edit one.")
-        profile = None
+    profile = get_object_or_404(UserProfile, user_id=user)#.id
 
     return render(request, 'rango/user_area.html', {'users': users, 'profile': profile})
 
