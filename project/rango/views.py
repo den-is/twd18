@@ -12,6 +12,8 @@ from .models import Category, Page, UserProfile
 from .forms import CategoryForm, PageForm, UserProfileForm
 from .bing_search import run_query
 
+import logging
+logger = logging.getLogger(__name__)
 
 def index(request):
 
@@ -79,9 +81,15 @@ def add_category(request):
         form = CategoryForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            newcat = form.save()
+
+            logger.info('Category "{}" created by user "{}"'.format(newcat.name, request.user.username))
+
             return redirect(reverse('rango:index'))
         else:
+
+            logger.warning('Unsuccessful category creation attempt')
+
             print form.errors
     else:
         form = CategoryForm()
@@ -102,9 +110,13 @@ def add_page(request, category_name_slug):
                 page = form.save(commit=False)
                 page.category = cat
                 page.views = 0
-                page.save()
+                newpage = page.save()
+
+                logger.info('Page "{}" created by user "{}"'.format(newpage.title, request.user.username))
+
                 return redirect(reverse('rango:category', args=(category_name_slug, )))
         else:
+            logger.warning('Unsuccessful page creation attempt')
             print form.errors
     else:
         form = PageForm()
@@ -150,8 +162,10 @@ def register_profile(request):
             profile.save()
 
             messages.success(request, 'Profile details updated')
+
             return redirect(reverse('rango:index'))
         else:
+            logger.warning('Unsuccessful registration atempt')
             messages.error(request, 'Fill in all required fields')
     else:
         form = UserProfileForm()
@@ -174,9 +188,12 @@ def edit_profile(request):
 
             new_profile.save()
 
+            logger.info('Profile updated. user: {}'.format(request.user.username))
             messages.success(request, 'Profile details updated')
+
             return redirect(reverse('rango:index'))
         else:
+            logger.warning('Unsuccessful profile edition atempt')
             messages.error(request, 'Fill in all required fields')
     else:
         profile_form = UserProfileForm(instance=profile)

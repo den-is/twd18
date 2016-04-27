@@ -26,6 +26,7 @@ services:
     volumes:
       - /srv/static_root:/srv/static_root
       - /srv/media_root:/srv/media_root
+      - /srv/logs:/srv/logs
     expose:
       - "8000"
     depends_on:
