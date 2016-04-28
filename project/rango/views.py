@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
@@ -199,6 +199,19 @@ def edit_profile(request):
         profile_form = UserProfileForm(instance=profile)
 
     return render(request, 'rango/profile.html', {'profile_form': profile_form})
+
+@login_required
+def delete_profile(request):
+    user = request.user
+    username = user.username
+    if request.user.is_authenticated() and username != 'admin':
+        logout(request)
+        user.delete()
+
+        logger.warning('Profile deleted: {}'.format(username))
+        messages.warning(request, 'Profile deleted: {}'.format(username))
+
+    return redirect(reverse('rango:index'))
 
 @login_required
 def user_area(request, user_name):

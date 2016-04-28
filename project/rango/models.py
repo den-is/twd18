@@ -52,6 +52,7 @@ def ensure_profile_exists(sender, **kwargs):
 def delete_userpic(sender, instance, **kwargs):
     """Delete UserProfile picture when profile is deleted.
     """
-    storage = instance.picture.storage
-    path = instance.picture.path
-    storage.delete(path)
+    if instance.picture:
+        storage = instance.picture.storage
+        path = instance.picture.path
+        storage.delete(path)

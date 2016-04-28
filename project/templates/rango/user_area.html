@@ -22,6 +22,9 @@
                 {% if profile.website %}
                 <li class="list-group-item">{{ profile.website }}</li>
                 {% endif %}
+                {% if user.username == profile.user.username and user.username != 'admin' %}
+                <li class="list-group-item"><a href="{% url 'rango:delete_profile' %}">Delete profile</a></li>
+                {% endif %}
               </ul>
             </div>
           </div>
