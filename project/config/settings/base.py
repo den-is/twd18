@@ -24,6 +24,7 @@ INSTALLED_APPS = (
     # 3rd party apps
     'registration',
     'crispy_forms',
+    'rest_framework',
     # my apps
     'rango',
 )
@@ -115,4 +116,9 @@ LOGGING = {
             'propagate': True,
         },
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10
 }

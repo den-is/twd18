@@ -7,6 +7,6 @@
   * ~~serve media with nginx~~
 * integrate django-allauth
 * ~~implement logging (log registrations, login success/fail, deletions, additions, ...)~~
-* add api
+* ~~add api~~
 * custom error pages
 * integrate external `Google search API` or `DuckDuckGo API` or `Yahoo search API` - whichever, except Bing, for practice
